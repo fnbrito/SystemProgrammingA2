@@ -1,0 +1,8 @@
+//
+// Created by filipe on 2/17/21.
+//
+
+#ifndef ENCODEINPUT_ENCODEINPUT_H
+#define ENCODEINPUT_ENCODEINPUT_H
+
+#endif //ENCODEINPUT_ENCODEINPUT_H
