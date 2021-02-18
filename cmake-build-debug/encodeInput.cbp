@@ -76,7 +76,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/filipe/CLionProjects/encodeInput/main.c">
+		<Unit filename="/home/filipe/CLionProjects/encodeInput/src/main.c">
 			<Option target="encodeInput"/>
 		</Unit>
 		<Unit filename="/home/filipe/CLionProjects/encodeInput/CMakeLists.txt">

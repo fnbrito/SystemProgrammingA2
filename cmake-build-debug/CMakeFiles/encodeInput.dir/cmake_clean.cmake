@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/encodeInput.dir/main.c.o"
+  "CMakeFiles/encodeInput.dir/src/main.c.o"
   "encodeInput"
   "encodeInput.pdb"
 )
