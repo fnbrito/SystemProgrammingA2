@@ -6,7 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/home/filipe/CLionProjects/encodeInput/main.c
+/home/filipe/CLionProjects/encodeInput/inc/encodeInput.h
+stdbool.h
+-
+stdlib.h
+-
 stdio.h
 -
+unistd.h
+-
+errno.h
+-
+string.h
+-
+getopt.h
+-
+../src/middleman.c
+/home/filipe/CLionProjects/encodeInput/src/middleman.c
+
+/home/filipe/CLionProjects/encodeInput/src/main.c
+../inc/encodeInput.h
+/home/filipe/CLionProjects/encodeInput/inc/encodeInput.h
+
+/home/filipe/CLionProjects/encodeInput/src/middleman.c
+../inc/encodeInput.h
+/home/filipe/CLionProjects/encodeInput/inc/encodeInput.h
 

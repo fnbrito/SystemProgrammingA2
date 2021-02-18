@@ -102,11 +102,11 @@ int main(int argc, char* argv[]) {
 
 	if (flagFailure)
 		return EXIT_FAILURE;
-	else
-		//continue program / call function !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		return EXIT_SUCCESS;
+
+	flagHandler(inputFileName, outputFileName);
+	return EXIT_SUCCESS;
 }
 
-void inline usage() {
+inline void usage() {
 	printf(USAGE_FMT);
 }
