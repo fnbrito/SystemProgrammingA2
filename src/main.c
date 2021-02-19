@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
 					{
 						flagIName = true;
 						//strncpy(inputPath, optarg, size);
-						inputPath = optarg;
+						inputPath = strdup(optarg);
 					}
 					flagI = true;
 				}
@@ -79,8 +79,13 @@ int main(int argc, char* argv[]) {
 					if ((size = strlen(optarg)) < MAX_FILENAME)
 					{
 						flagOName = true;
-						strncpy(outputPath, optarg, size);
-						outputPath = optarg;
+//						if((outputPath = (char*)malloc(size)) == NULL)
+//						{
+//							printf(MEMORY_ERROR);
+//							return EXIT_FAILURE;
+//						}
+//						strncpy(outputPath, optarg, size);
+						outputPath = strdup(optarg);
 					}
 				}
 				flagO = true;
@@ -106,5 +111,11 @@ int main(int argc, char* argv[]) {
 		return EXIT_FAILURE;
 
 	flagHandler(inputPath, outputPath);
+
+	if (inputPath)
+		free(inputPath);
+	if (outputPath)
+		free(outputPath);
+
 	return EXIT_SUCCESS;
 }

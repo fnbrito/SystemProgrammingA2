@@ -19,27 +19,36 @@ void flagHandler(const char* inputName, const char* outputName)
 	bool canRead = false;
 	bool canWrite = false;
 
-	inFilename = getBasename(inputName);	//!!!!!!!!!!!!!!!!!! remember to free!
-	outFilename = getBasename(outputName);	//!!!!!!!!!!!!!!!!!! remember to free!
-	if (realloc(outFilename, strlen(outFilename) + 6) != NULL) // realloc to allow for extension appending
+	if (inputName)
 	{
-		if (flagSRecord)
-			strcat(outFilename, ".srec");
-		else
-			strcat(outFilename, ".asm");
-	}
-	else
-	{
-		printf(MEMORY_ERROR);
-		if (inFilename)
-			free(inFilename);
-		if (outFilename)
-			free(outFilename);
-		exit(EXIT_FAILURE);
+		inFilename = getBasename(inputName);	//!!!!!!!!!!!!!!!!!! remember to free!
+		canRead = ableToRead(inputName);
 	}
 
-	canRead = ableToRead(inputName);
-	canWrite = ableToWrite(outFilename);
+	if (outputName)
+	{
+		outFilename = getBasename(outputName);	//!!!!!!!!!!!!!!!!!! remember to free!
+		if (realloc(outFilename, strlen(outFilename) + 6) != NULL) // realloc to allow for extension appending
+		{
+			if (flagSRecord)
+				strcat(outFilename, ".srec");
+			else
+				strcat(outFilename, ".asm");
+		}
+		else
+		{
+			printf(MEMORY_ERROR);
+			if (inFilename)
+				free(inFilename);
+			if (outFilename)
+				free(outFilename);
+			exit(EXIT_FAILURE);
+		}
+		canWrite = ableToWrite(outFilename);
+		remove(outFilename);
+	}
+
+
 
 
 	if (flagI)
@@ -62,15 +71,15 @@ void flagHandler(const char* inputName, const char* outputName)
 		}
 		else // flagO = false
 		{
-		// 10 - inputfile - inputfile + extension
+		// 10 - inputfile -> inputfile + extension
 
 			if (realloc(inFilename, strlen(inFilename) + 6) != NULL)
 			{
 				if (flagSRecord) {
-					strcat(outFilename, ".srec");
+					strcat(inFilename, ".srec");
 				}
 				else {
-					strcat(outFilename, ".asm");
+					strcat(inFilename, ".asm");
 				}
 			}
 			else
@@ -78,7 +87,7 @@ void flagHandler(const char* inputName, const char* outputName)
 				printf(MEMORY_ERROR);
 				exit(EXIT_FAILURE);
 			}
-			canWrite = ableToRead(inFilename);
+			canWrite = ableToWrite(inFilename);
 			if (canRead && canWrite)
 			{
 				//call converter and pass !!!INPUTFILENAME!!!
@@ -96,11 +105,12 @@ void flagHandler(const char* inputName, const char* outputName)
 	{
 		if (flagO)
 		{
-			// 01 - stdin - outputfile
+			// 01 - stdin -> outputfile
 
 			if (canWrite)
 			{
 				flagToPipe = true;
+				remove(outFilename);
 				// call converter
 			}
 
@@ -108,7 +118,7 @@ void flagHandler(const char* inputName, const char* outputName)
 		}
 		else // flagO = false
 		{
-			// 00 - stdin - stdout
+			// 00 - stdin -> stdout
 			flagFromPipe = true;
 			flagToPipe = true;
 			// call converter
