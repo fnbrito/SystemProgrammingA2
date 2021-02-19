@@ -18,6 +18,7 @@
 #define IO_ERROR "ERROR: Could not read or write to file.\n"
 #define MEMORY_ERROR "ERROR: Could not allocate memory.\n"
 #define MAX_FILENAME 255
+#define BLOCK_SIZE 256
 
 bool flagI;
 bool flagIName;
@@ -33,6 +34,6 @@ void flagHandler(const char* inputName, const char* outputName);
 char* getBasename(const char* path);
 bool ableToRead(const char* filePath);
 bool ableToWrite(const char* filePath);
-int encode(const char* filename, char* outByteBlock);
+unsigned long encode(const char* filename, char* outByteBlock);
 
 #endif //ENCODEINPUT_ENCODEINPUT_H

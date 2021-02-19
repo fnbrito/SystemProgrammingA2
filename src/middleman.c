@@ -27,14 +27,8 @@ void flagHandler(const char* inputName, const char* outputName)
 	if (outputName)
 	{
 		outFilename = getBasename(outputName);	//!!!!!!!!!!!!!!!!!! remember to free!
-		if (realloc(outFilename, strlen(outFilename) + 6) != NULL) // realloc to allow for extension appending
-		{
-			if (flagSRecord)
-				strcat(outFilename, ".srec");
-			else
-				strcat(outFilename, ".asm");
-		}
-		else
+
+		if ((outFilename = realloc(outFilename, strlen(outFilename) + 6)) == NULL) // realloc to allow for extension appending
 		{
 			printf(MEMORY_ERROR);
 			if (inFilename)
@@ -42,9 +36,14 @@ void flagHandler(const char* inputName, const char* outputName)
 			if (outFilename)
 				free(outFilename);
 			exit(EXIT_FAILURE);
+
 		}
+
+		if (flagSRecord)
+			strcat(outFilename, ".srec");
+		else
+			strcat(outFilename, ".asm");
 		canWrite = ableToWrite(outFilename);
-		remove(outFilename);
 	}
 
 
@@ -70,21 +69,23 @@ void flagHandler(const char* inputName, const char* outputName)
 		{
 		// i - inputfile -> inputfile + extension
 
-			if (realloc(inFilename, strlen(inFilename) + 6) != NULL)
-			{
-				if (flagSRecord) {
-					strcat(inFilename, ".srec");
-				}
-				else {
-					strcat(inFilename, ".asm");
-				}
-			}
-			else
+			if ((inFilename = realloc(inFilename, strlen(inFilename) + 6)) == NULL)
 			{
 				printf(MEMORY_ERROR);
+				if (inFilename)
+					free(inFilename);
+				if (outFilename)
+					free(outFilename);
 				exit(EXIT_FAILURE);
 			}
+
+			if (flagSRecord)
+				strcat(inFilename, ".srec");
+			else
+				strcat(inFilename, ".asm");
+
 			canWrite = ableToWrite(inFilename);
+
 			if (canRead && canWrite)
 			{
 				//call encoder and pass !!!INPUTFILENAME!!!
@@ -107,7 +108,7 @@ void flagHandler(const char* inputName, const char* outputName)
 			if (canWrite)
 			{
 				flagToPipe = true;
-				remove(outFilename);
+//				remove(outFilename);   WHY WAS THIS HERE?
 				// call encoder
 			}
 
@@ -179,6 +180,7 @@ bool ableToWrite(const char* filePath)
 	if ((fp = fopen(filePath, "w")) != NULL)
 	{
 		fclose(fp);
+		remove(filePath);
 		return true;
 	}
 	else
