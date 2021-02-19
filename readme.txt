@@ -4,32 +4,31 @@
 
 main.c
 	commandline arguments
-		bitfield byte to store options?
-		sets options
-	input (filenames only)
-	calls middleman
+		global boolean for flags
+		sets flags according to switches
+	calls middleman.c
 
 
 middleman.c
-	chooses where and how the code will be returned
-		• writes to file
-		• sends to stdout
-	gets input (code) and sends it to be converted
-	handles input of code
-	calls functions to convert the code
+	decides how the input and output are to be handled
+	calls functions to receive and convert code
 
 
-converter.c
-	convert hexadecimal characters to hexadecimal number array
-		sends to encoder
-	convert number array to hexadecimal characters
-		receives from encoder 
-	
+encoder
+	if fromPipe is set:
+		reads pipe to get the binary data
+	else:
+		reads from file
 
-encoder.c
-	creates the S type records or assembly lines of code
-	returns to converter
+	if -srec is set:
+		convert byte block to S-Record
+	else:
+		convert byte block to hexadecimal characters (.asm)
 
+	if toPipe is set:
+		writes to pipe
+	else
+		writes to file
 
 
 #################################################

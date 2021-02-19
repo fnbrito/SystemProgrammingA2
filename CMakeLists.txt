@@ -16,7 +16,6 @@ include_directories(./inc)
 #    SOURCE_FILES
 #        ${APP_SRC}/main.c
 #        ${APP_SRC}/middleman.c
-#        ${APP_SRC}/converter.c
 #        ${APP_SRC}/encoder.c
 #        ${APP_INC}/encodeInput.h
 #)
@@ -24,7 +23,6 @@ include_directories(./inc)
 add_executable(encodeInput
         ./src/main.c
         ./src/middleman.c
-        ./src/converter.c
         ./src/encoder.c
         ./inc/encodeInput.h
         )

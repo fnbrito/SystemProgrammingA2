@@ -29,9 +29,10 @@ bool flagFromPipe;
 bool flagToPipe;
 
 void usage();
-void flagHandler();
+void flagHandler(const char* inputName, const char* outputName);
 char* getBasename(const char* path);
 bool ableToRead(const char* filePath);
 bool ableToWrite(const char* filePath);
+void encode(const char* filename);
 
 #endif //ENCODEINPUT_ENCODEINPUT_H

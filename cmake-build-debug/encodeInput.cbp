@@ -83,9 +83,6 @@
 		<Unit filename="/home/filipe/CLionProjects/encodeInput/inc/encodeInput.h">
 			<Option target="encodeInput"/>
 		</Unit>
-		<Unit filename="/home/filipe/CLionProjects/encodeInput/src/converter.c">
-			<Option target="encodeInput"/>
-		</Unit>
 		<Unit filename="/home/filipe/CLionProjects/encodeInput/src/encoder.c">
 			<Option target="encodeInput"/>
 		</Unit>

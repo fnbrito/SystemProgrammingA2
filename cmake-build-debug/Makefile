@@ -143,33 +143,6 @@ encodeInput/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/build
 .PHONY : encodeInput/fast
 
-src/converter.o: src/converter.c.o
-
-.PHONY : src/converter.o
-
-# target to build an object file
-src/converter.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/src/converter.c.o
-.PHONY : src/converter.c.o
-
-src/converter.i: src/converter.c.i
-
-.PHONY : src/converter.i
-
-# target to preprocess a source file
-src/converter.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/src/converter.c.i
-.PHONY : src/converter.c.i
-
-src/converter.s: src/converter.c.s
-
-.PHONY : src/converter.s
-
-# target to generate assembly for a file
-src/converter.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/src/converter.c.s
-.PHONY : src/converter.c.s
-
 src/encoder.o: src/encoder.c.o
 
 .PHONY : src/encoder.o
@@ -260,9 +233,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... encodeInput"
-	@echo "... src/converter.o"
-	@echo "... src/converter.i"
-	@echo "... src/converter.s"
 	@echo "... src/encoder.o"
 	@echo "... src/encoder.i"
 	@echo "... src/encoder.s"

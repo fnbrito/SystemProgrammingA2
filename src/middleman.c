@@ -15,7 +15,6 @@ void flagHandler(const char* inputName, const char* outputName)
 {
 	char* inFilename = NULL;
 	char* outFilename = NULL;
-	char* input = NULL;
 	bool canRead = false;
 	bool canWrite = false;
 
@@ -49,17 +48,15 @@ void flagHandler(const char* inputName, const char* outputName)
 	}
 
 
-
-
 	if (flagI)
 	{
 		if (flagO)
 		{
-		// 11 - inputfile -> outputfile + extensions
+		// i+o - inputfile -> outputfile + extensions
 			if (canRead && canWrite)
 			{
 				flagFromPipe = true;
-				// call converter and pass filenames
+				// call encoder and pass filenames
 			}
 			else
 			{
@@ -71,7 +68,7 @@ void flagHandler(const char* inputName, const char* outputName)
 		}
 		else // flagO = false
 		{
-		// 10 - inputfile -> inputfile + extension
+		// i - inputfile -> inputfile + extension
 
 			if (realloc(inFilename, strlen(inFilename) + 6) != NULL)
 			{
@@ -90,7 +87,7 @@ void flagHandler(const char* inputName, const char* outputName)
 			canWrite = ableToWrite(inFilename);
 			if (canRead && canWrite)
 			{
-				//call converter and pass !!!INPUTFILENAME!!!
+				//call encoder and pass !!!INPUTFILENAME!!!
 			}
 			else
 			{
@@ -105,23 +102,23 @@ void flagHandler(const char* inputName, const char* outputName)
 	{
 		if (flagO)
 		{
-			// 01 - stdin -> outputfile
+			// o - stdin -> outputfile
 
 			if (canWrite)
 			{
 				flagToPipe = true;
 				remove(outFilename);
-				// call converter
+				// call encoder
 			}
 
 			printf("DEBUG: flagO");
 		}
 		else // flagO = false
 		{
-			// 00 - stdin -> stdout
+			// noflag - stdin -> stdout
 			flagFromPipe = true;
 			flagToPipe = true;
-			// call converter
+			// call encoder
 			printf("DEBUG: noflags");
 		}
 	}
