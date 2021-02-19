@@ -170,6 +170,33 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/middleman.o: src/middleman.c.o
+
+.PHONY : src/middleman.o
+
+# target to build an object file
+src/middleman.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/src/middleman.c.o
+.PHONY : src/middleman.c.o
+
+src/middleman.i: src/middleman.c.i
+
+.PHONY : src/middleman.i
+
+# target to preprocess a source file
+src/middleman.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/src/middleman.c.i
+.PHONY : src/middleman.c.i
+
+src/middleman.s: src/middleman.c.s
+
+.PHONY : src/middleman.s
+
+# target to generate assembly for a file
+src/middleman.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/src/middleman.c.s
+.PHONY : src/middleman.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -182,6 +209,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/middleman.o"
+	@echo "... src/middleman.i"
+	@echo "... src/middleman.s"
 .PHONY : help
 
 

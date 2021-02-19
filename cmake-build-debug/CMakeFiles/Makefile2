@@ -94,12 +94,12 @@ clean: CMakeFiles/encodeInput.dir/clean
 CMakeFiles/encodeInput.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/encodeInput.dir/build.make CMakeFiles/encodeInput.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/filipe/CLionProjects/encodeInput/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target encodeInput"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/filipe/CLionProjects/encodeInput/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target encodeInput"
 .PHONY : CMakeFiles/encodeInput.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/encodeInput.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/filipe/CLionProjects/encodeInput/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/filipe/CLionProjects/encodeInput/cmake-build-debug/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/encodeInput.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/filipe/CLionProjects/encodeInput/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/encodeInput.dir/rule

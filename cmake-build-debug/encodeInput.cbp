@@ -79,6 +79,9 @@
 		<Unit filename="/home/filipe/CLionProjects/encodeInput/src/main.c">
 			<Option target="encodeInput"/>
 		</Unit>
+		<Unit filename="/home/filipe/CLionProjects/encodeInput/src/middleman.c">
+			<Option target="encodeInput"/>
+		</Unit>
 		<Unit filename="/home/filipe/CLionProjects/encodeInput/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -1,12 +1,12 @@
 #include "../inc/encodeInput.h"
 
-void usage();
-
 int main(int argc, char* argv[]) {
 
 	int opts;
-	char inputFileName[MAX_FILENAME] = {0};
-	char outputFileName[MAX_FILENAME] = {0};
+//	char inputPath[MAX_FILENAME] = {0};
+//	char outputPath[MAX_FILENAME] = {0};
+	char* inputPath = NULL;
+	char* outputPath = NULL;
 
 	printf("encodeInput started!\n");
 
@@ -20,8 +20,8 @@ int main(int argc, char* argv[]) {
 
 				if ((optarg) && (strcmp(optarg, "rec") == 0))
 				{
-					printf("DEBUG: flagSrecord = true\n");
-					flagSrecord = true;
+					printf("DEBUG: flagSRecord = true\n");
+					flagSRecord = true;
 				}
 				else
 				{
@@ -58,7 +58,8 @@ int main(int argc, char* argv[]) {
 					if ((size = strlen(optarg)) < MAX_FILENAME)
 					{
 						flagIName = true;
-						strncpy(inputFileName, optarg, size);
+						//strncpy(inputPath, optarg, size);
+						inputPath = optarg;
 					}
 					flagI = true;
 				}
@@ -78,7 +79,8 @@ int main(int argc, char* argv[]) {
 					if ((size = strlen(optarg)) < MAX_FILENAME)
 					{
 						flagOName = true;
-						strncpy(outputFileName, optarg, size);
+						strncpy(outputPath, optarg, size);
+						outputPath = optarg;
 					}
 				}
 				flagO = true;
@@ -103,7 +105,7 @@ int main(int argc, char* argv[]) {
 	if (flagFailure)
 		return EXIT_FAILURE;
 
-	flagHandler(inputFileName, outputFileName);
+	flagHandler(inputPath, outputPath);
 	return EXIT_SUCCESS;
 }
 

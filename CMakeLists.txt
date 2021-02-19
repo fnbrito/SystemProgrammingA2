@@ -3,4 +3,4 @@ project(encodeInput C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(encodeInput src/main.c)
+add_executable(encodeInput src/main.c src/middleman.c)

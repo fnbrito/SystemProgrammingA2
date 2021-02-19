@@ -1,16 +1,16 @@
-###############################################
-# Rough sketch of what to do:			#
-###############################################
+#################################################
+# Rough sketch of what to do:		        	#
+#################################################
 
 main.c
 	commandline arguments
 		bitfield byte to store options?
 		sets options
 	input (filenames only)
-	calls hrcode
+	calls middleman
 
 
-hrcode.c
+middleman.c
 	chooses where and how the code will be returned
 		• writes to file
 		• sends to stdout
@@ -32,9 +32,9 @@ encoder.c
 
 
 
-###############################################
-# NOTES 					#
-###############################################
+#################################################
+# NOTES                     					#
+#################################################
 Line formation
 	TT CC AAAA DD..DD MM
 
