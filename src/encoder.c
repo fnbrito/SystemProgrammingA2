@@ -3,35 +3,37 @@
 //
 #include "../inc/encodeInput.h"
 
-void encode(const char* filename)
+int encode(const char* filename, char* outByteBlock)
 {
+	int size = 0;
 	unsigned char* byteBlock = NULL;
+
 
 	if (flagFromPipe)
 	{
-		//reads pipe to get the binary data
+		//gets binary data from STDIN (pipe)
 	}
 	else
 	{
-		//reads from filename
+		//gets binary data from FILE
 	}
 
 	if (flagSRecord)
 	{
-		//convert byte block to S-Record
+		//converts binary data to S-Record
 	}
 	else
 	{
-		//convert byte block to hexadecimal characters (.asm)
+		//converts binary data to ASM
 	}
 
 	if (flagToPipe)
 	{
-		//writes to pipe
+		//writes to STDOUT (pipe)
 	}
 	else
 	{
-		//writes to filename
+		//writes to FILE
 	}
 }
 
