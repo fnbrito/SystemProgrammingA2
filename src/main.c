@@ -108,7 +108,3 @@ int main(int argc, char* argv[]) {
 	flagHandler(inputPath, outputPath);
 	return EXIT_SUCCESS;
 }
-
-inline void usage() {
-	printf(USAGE_FMT);
-}

@@ -3,7 +3,6 @@
 //
 #include "../inc/encodeInput.h"
 
-
 //
 // FUNCTION 	:	flagHandler
 // DESCRIPTION	:	This function decides how the data will be handled depending on
@@ -32,6 +31,10 @@ void flagHandler(const char* inputName, const char* outputName)
 	else
 	{
 		printf(MEMORY_ERROR);
+		if (inFilename)
+			free(inFilename);
+		if (outFilename)
+			free(outFilename);
 		exit(EXIT_FAILURE);
 	}
 
@@ -175,4 +178,9 @@ bool ableToWrite(const char* filePath)
 	{
 		return false;
 	}
+}
+
+
+void usage() {
+	printf(USAGE_FMT);
 }

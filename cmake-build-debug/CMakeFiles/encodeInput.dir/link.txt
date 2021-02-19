@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/encodeInput.dir/src/main.c.o CMakeFiles/encodeInput.dir/src/middleman.c.o  -o encodeInput 
+/usr/bin/cc -g   CMakeFiles/encodeInput.dir/src/main.c.o CMakeFiles/encodeInput.dir/src/middleman.c.o CMakeFiles/encodeInput.dir/src/converter.c.o CMakeFiles/encodeInput.dir/src/encoder.c.o  -o encodeInput 

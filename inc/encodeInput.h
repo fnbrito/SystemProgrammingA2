@@ -12,8 +12,6 @@
 #include <string.h>
 #include <getopt.h>
 
-#include "../src/middleman.c"
-
 #define OPTSTR "s::h::i::o::"
 #define USAGE_FMT "Usage: [-iINPUTFILENAME] [-oOUTPUTFILENAME] [-srec] [-h]\n"
 #define COMMAND_ERROR "ERROR: Unrecognized command.\n"
@@ -30,7 +28,7 @@ bool flagFailure;
 bool flagFromPipe;
 bool flagToPipe;
 
-inline void usage();
+void usage();
 void flagHandler();
 char* getBasename(const char* path);
 bool ableToRead(const char* filePath);

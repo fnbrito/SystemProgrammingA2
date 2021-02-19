@@ -44,6 +44,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/filipe/CLionProjects/encodeInput/./src"/>
+					<Add directory="/home/filipe/CLionProjects/encodeInput/./inc"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
@@ -63,6 +65,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/filipe/CLionProjects/encodeInput/./src"/>
+					<Add directory="/home/filipe/CLionProjects/encodeInput/./inc"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
@@ -76,6 +80,15 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/filipe/CLionProjects/encodeInput/inc/encodeInput.h">
+			<Option target="encodeInput"/>
+		</Unit>
+		<Unit filename="/home/filipe/CLionProjects/encodeInput/src/converter.c">
+			<Option target="encodeInput"/>
+		</Unit>
+		<Unit filename="/home/filipe/CLionProjects/encodeInput/src/encoder.c">
+			<Option target="encodeInput"/>
+		</Unit>
 		<Unit filename="/home/filipe/CLionProjects/encodeInput/src/main.c">
 			<Option target="encodeInput"/>
 		</Unit>

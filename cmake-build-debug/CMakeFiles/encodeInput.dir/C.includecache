@@ -21,8 +21,6 @@ string.h
 -
 getopt.h
 -
-../src/middleman.c
-/home/filipe/CLionProjects/encodeInput/src/middleman.c
 
 /home/filipe/CLionProjects/encodeInput/src/main.c
 ../inc/encodeInput.h
