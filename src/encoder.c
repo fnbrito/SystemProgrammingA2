@@ -3,10 +3,11 @@
 //
 #include "../inc/encodeInput.h"
 
-unsigned long encode(const char* filename, char* outByteBlock)
+unsigned long encode(const char* filename) //char* outByteBlock
 {
-	FILE* fp;
+	FILE* fp = NULL;
 	unsigned long blockSize = 0;						// Size of the accumulated data block
+	unsigned long previousBlockSize = 0;
 	unsigned long size = 0;								// Number of bytes read from in / size of read
 	unsigned char receivedBytes[BLOCK_SIZE] = {0};		// Array to store data from in
 	unsigned char* data = NULL;							// Data block to store accumulated data (blockSize is the size)
@@ -21,6 +22,21 @@ unsigned long encode(const char* filename, char* outByteBlock)
 			printf(IO_ERROR);
 			exit(EXIT_FAILURE);
 		}
+
+		while ((size = fread(receivedBytes, 1, BLOCK_SIZE, stdin)) > 0)
+		{
+			previousBlockSize = blockSize;
+			blockSize += size;
+			if ((data = (unsigned char*)realloc(data, blockSize)) == NULL)
+			{
+				if (data)
+					free(data);
+				printf(IO_ERROR);
+				exit(EXIT_FAILURE);
+			}
+
+			memcpy(data + previousBlockSize, receivedBytes, size);
+		}
 	}
 	else
 	{
@@ -30,23 +46,23 @@ unsigned long encode(const char* filename, char* outByteBlock)
 			printf(IO_ERROR);
 			exit(EXIT_FAILURE);
 		}
-	}
 
-
-
-	while ((size = fread(receivedBytes, 1, BLOCK_SIZE, fp)) > 0)
-	{
-		blockSize += size;
-		if ((data = (unsigned char*)realloc(data, blockSize)) == NULL)
+		while ((size = fread(receivedBytes, 1, BLOCK_SIZE, fp)) > 0)
 		{
-			if (data)
-				free(data);
-			printf(IO_ERROR);
-			exit(EXIT_FAILURE);
-		}
+			previousBlockSize = blockSize;
+			blockSize += size;
+			if ((data = (unsigned char*)realloc(data, blockSize)) == NULL)
+			{
+				if (data)
+					free(data);
+				printf(IO_ERROR);
+				exit(EXIT_FAILURE);
+			}
 
-		memcpy(data, receivedBytes, size);
+			memcpy(data + previousBlockSize, receivedBytes, size);
+		}
 	}
+
 
 
 	if (flagSRecord)

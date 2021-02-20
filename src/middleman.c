@@ -119,7 +119,9 @@ void flagHandler(const char* inputName, const char* outputName)
 			// noflag - stdin -> stdout
 			flagFromPipe = true;
 			flagToPipe = true;
-			// call encoder
+
+			encode(outFilename);
+
 			printf("DEBUG: noflags");
 		}
 	}

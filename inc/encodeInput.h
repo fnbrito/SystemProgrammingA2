@@ -34,6 +34,6 @@ void flagHandler(const char* inputName, const char* outputName);
 char* getBasename(const char* path);
 bool ableToRead(const char* filePath);
 bool ableToWrite(const char* filePath);
-unsigned long encode(const char* filename, char* outByteBlock);
+unsigned long encode(const char* filename);
 
 #endif //ENCODEINPUT_ENCODEINPUT_H
