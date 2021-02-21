@@ -1,91 +1,80 @@
+/*
+ * FILE				: main.c
+ * PROJECT			: Assignment 02 - encodeInput
+ * PROGRAMMER		: Filipe Brito (7843808) & Zandrin Joseph (8693058)
+ * FIRST VERSION	: 17/FEB/2021
+ * DESCRIPTION		:
+ * 		This is a tool for Linux. It will take in any binary data and
+ * 		format it according to the switches used. The output can either be
+ * 		formatted to the S19 Record standard or a dc.b Assembly Constant Byte declaration.
+ */
 #include "../inc/encodeInput.h"
 
 int main(int argc, char* argv[]) {
 
+	bool bFailure = false;
 	int opts;
-//	char inputPath[MAX_FILENAME] = {0};
-//	char outputPath[MAX_FILENAME] = {0};
-	char* inputPath = NULL;
-	char* outputPath = NULL;
+	char inputPath[MAX_FILENAME] = {0};
+	char outputPath[MAX_FILENAME] = {0};
 
-	printf("encodeInput started!\n");
 
-	while (((opts = getopt(argc,argv,OPTSTR)) != -1) && !flagFailure)
+	while (((opts = getopt(argc,argv,OPTSTR)) != -1) && !bFailure)
 	{
 		switch (opts)
 		{
 			case 's':
-				printf("DEBUG: -s was found\n");
-				printf("DEBUG: Added: %s\n", optarg);
 
 				if ((optarg) && (strcmp(optarg, "rec") == 0))
 				{
-					printf("DEBUG: flagSRecord = true\n");
 					flagSRecord = true;
 				}
 				else
 				{
 					printf(COMMAND_ERROR);
-					flagFailure = true;
+					bFailure = true;
 				}
 				break;
 
 			case 'h':
-				printf("DEBUG: -h was found\n");
 				if (!optarg)
 				{
-					printf("DEBUG: usage() called\n");
 					usage();
 				}
 				else if (strcmp(optarg, "elp") == 0)
 				{
-					printf("DEBUG: usage() called\n");
 					usage();
 				}
 				else
 				{
 					printf(COMMAND_ERROR);
-					flagFailure = true;
+					bFailure = true;
 				}
 				break;
 
 			case 'i':
-				printf("DEBUG: -i was found\n");
 				if (optarg)
 				{
-					printf("DEBUG: inputfilename declared as %s\n", optarg);
-					unsigned short size = 0;
-					if ((size = strlen(optarg)) < MAX_FILENAME)
+					if (strlen(optarg) < MAX_FILENAME)
 					{
 						flagIName = true;
-						//strncpy(inputPath, optarg, size);
-						inputPath = strdup(optarg);
+						strcpy(inputPath, optarg);
 					}
 					flagI = true;
 				}
 				else
 				{
-					printf("DEBUG: empty\n");
 					flagI = true;
 				}
 				break;
 			case 'o':
-				printf("DEBUG: -o was found\n");
 
 				if (optarg)
 				{
-					printf("DEBUG: outputfilename declared as %s\n", optarg);
 					unsigned short size = 0;
 					if ((size = strlen(optarg)) < MAX_FILENAME)
 					{
 						flagOName = true;
-//						if((outputPath = (char*)malloc(size)) == NULL)
-//						{
-//							printf(MEMORY_ERROR);
-//							return EXIT_FAILURE;
-//						}
-//						strncpy(outputPath, optarg, size);
-						outputPath = strdup(optarg);
+						strcpy(outputPath, optarg);
 					}
 				}
 				flagO = true;
@@ -93,13 +82,13 @@ int main(int argc, char* argv[]) {
 
 			case '?':
 				printf("Unrecognized command: %c\n", optopt);
-				flagFailure = true;
+				bFailure = true;
 				printf(COMMAND_ERROR);
 				usage();
 				break;
 
 			default:
-				flagFailure = true;
+				bFailure = true;
 				printf(COMMAND_ERROR);
 				usage();
 				break;
@@ -107,15 +96,10 @@ int main(int argc, char* argv[]) {
 
 	}
 
-	if (flagFailure)
+	if (bFailure)
 		return EXIT_FAILURE;
 
 	flagHandler(inputPath, outputPath);
-
-	if (inputPath)
-		free(inputPath);
-	if (outputPath)
-		free(outputPath);
 
 	return EXIT_SUCCESS;
 }

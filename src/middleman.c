@@ -1,7 +1,18 @@
-//
-// Created by filipe on 2/18/21.
-//
+/*
+ * FILE				: middleman.c
+ * PROJECT			: Assignment 02 - encodeInput
+ * PROGRAMMER		: Filipe Brito (7843808) & Zandrin Joseph (8693058)
+ * FIRST VERSION	: 18/FEB/2021
+ * DESCRIPTION		:
+ * 		This part of the program will handle the different options the user will have
+ * 		chosen, and act accordingly.
+ */
 #include "../inc/encodeInput.h"
+
+char* getBasename(const char* path);
+bool ableToRead(const char* filePath);
+bool ableToWrite(const char* filePath);
+
 
 //
 // FUNCTION 	:	flagHandler
@@ -18,32 +29,17 @@ void flagHandler(const char* inputName, const char* outputName)
 	bool canRead = false;
 	bool canWrite = false;
 
-	if (inputName)
+	if (strlen(inputName) > 0)
 	{
 		inFilename = getBasename(inputName);	//!!!!!!!!!!!!!!!!!! remember to free!
 		canRead = ableToRead(inputName);
 	}
 
-	if (outputName)
+	if (strlen(outputName) > 0)
 	{
 		outFilename = getBasename(outputName);	//!!!!!!!!!!!!!!!!!! remember to free!
-
-		if ((outFilename = realloc(outFilename, strlen(outFilename) + 6)) == NULL) // realloc to allow for extension appending
-		{
-			printf(MEMORY_ERROR);
-			if (inFilename)
-				free(inFilename);
-			if (outFilename)
-				free(outFilename);
-			exit(EXIT_FAILURE);
-
-		}
-
-		if (flagSRecord)
-			strcat(outFilename, ".srec");
-		else
-			strcat(outFilename, ".asm");
 		canWrite = ableToWrite(outFilename);
+		flagOName = true;
 	}
 
 
@@ -54,8 +50,7 @@ void flagHandler(const char* inputName, const char* outputName)
 		// i+o - inputfile -> outputfile + extensions
 			if (canRead && canWrite)
 			{
-				flagFromPipe = true;
-				// call encoder and pass filenames
+				encode(inputName, outputName);
 			}
 			else
 			{
@@ -63,32 +58,30 @@ void flagHandler(const char* inputName, const char* outputName)
 				exit(EXIT_FAILURE);
 			}
 
-			printf("DEBUG: flagI, flagO");
 		}
 		else // flagO = false
 		{
 		// i - inputfile -> inputfile + extension
-
-			if ((inFilename = realloc(inFilename, strlen(inFilename) + 6)) == NULL)
+			char* temp;
+			if ((temp = (char*)malloc(strlen(inFilename) + 6)) == NULL)
 			{
 				printf(MEMORY_ERROR);
-				if (inFilename)
-					free(inFilename);
-				if (outFilename)
-					free(outFilename);
 				exit(EXIT_FAILURE);
 			}
-
-			if (flagSRecord)
-				strcat(inFilename, ".srec");
-			else
-				strcat(inFilename, ".asm");
-
-			canWrite = ableToWrite(inFilename);
+			strcpy(temp, inputName);
+			flagSRecord ? strcat(temp, ".srec") : strcat(temp, ".asm");
+			canWrite = ableToWrite(temp);
+			if (temp)
+				free(temp);
 
 			if (canRead && canWrite)
 			{
 				//call encoder and pass !!!INPUTFILENAME!!!
+				encode(inFilename, NULL);
+			}
+			else if (canWrite)
+			{
+				encode(inFilename, NULL);
 			}
 			else
 			{
@@ -96,7 +89,6 @@ void flagHandler(const char* inputName, const char* outputName)
 				exit(EXIT_FAILURE);
 			}
 
-			printf("DEBUG: flagI");
 		}
 	}
 	else // flagI = false
@@ -107,12 +99,10 @@ void flagHandler(const char* inputName, const char* outputName)
 
 			if (canWrite)
 			{
-				flagToPipe = true;
-//				remove(outFilename);   WHY WAS THIS HERE?
-				// call encoder
+				flagFromPipe = true;
+				encode(NULL, outFilename);
 			}
 
-			printf("DEBUG: flagO");
 		}
 		else // flagO = false
 		{
@@ -120,11 +110,15 @@ void flagHandler(const char* inputName, const char* outputName)
 			flagFromPipe = true;
 			flagToPipe = true;
 
-			encode(outFilename);
+			encode(NULL, NULL);
 
-			printf("DEBUG: noflags");
 		}
 	}
+
+//	if (inFilename)
+//		free(inFilename);
+//	if(outFilename)
+//		free(outFilename);
 }
 
 
@@ -140,10 +134,12 @@ void flagHandler(const char* inputName, const char* outputName)
 char* getBasename(const char* path)
 {
 	// searches for a slash in the name
-	char* slash = strrchr(path, '/');
-
+	char* slash = NULL;
+	if ((slash = strrchr(path, '/')) == NULL)
+		return (char*)path;
 	// if a slash was found, return basename else return copy of path
-	return strdup(slash ? slash + 1 : path);
+	else
+		return strdup(slash ? slash + 1 : path);
 }
 
 
@@ -191,7 +187,12 @@ bool ableToWrite(const char* filePath)
 	}
 }
 
-
+//
+// FUNCTION 	:	usage
+// DESCRIPTION	:	This function simply prints the usage instructions to the screen.
+// PARAMETERS	:	void
+// RETURNS		:	void
+//
 void usage() {
 	printf(USAGE_FMT);
 }
